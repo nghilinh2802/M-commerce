@@ -12,4 +12,19 @@
     <string name="title_employee">Employee</string>
     <string name="title_customer">Customer</string>
     <string name="title_employee_management_header">EMPLOYEE MANAGEMENT</string>
+    <string name="title_healthcare">Health Care</string>
+    <string name="title_salary">Salary</string>
+    <string name="title_employee_healthcare">Employee Healthcare</string>
+    <string name="title_height">Height</string>
+    <string name="title_weight">Weight</string>
+    <string name="title_calculate">Calculate</string>
+    <string name="title_clear">Clear</string>
+    <string name="title_close">Close</string>
+    <string name="title_slim">Slim</string>
+    <string name="title_normal">Normal</string>
+    <string name="title_fat">Fat</string>
+    <string name="title_category">Category</string>
+    <string name="title_product">Product</string>
+    <string name="title_product_management">PRODUCT MANAGEMENT</string>
+    <string name="title_category_management">CATEGORY MANAGEMENT</string>
 </resources>
