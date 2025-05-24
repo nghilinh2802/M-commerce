@@ -109,6 +109,13 @@ public class ListCategory implements Serializable {
         Product p50 = new Product(50, "Mango Sorbet", 50, 18.0, 240);
         c10.addProduct(p46); c10.addProduct(p47); c10.addProduct(p48); c10.addProduct(p49); c10.addProduct(p50);
         categories.add(c10);
-    }
 
+        Category allCategory = new Category(000, "All", 1);
+        for (Category cat : categories) {
+            if (!cat.getName().equals("All")) {
+                allCategory.getProducts().addAll(cat.getProducts());
+            }
+        }
+        categories.add(0, allCategory); // Ưu tiên hiển thị đầu tiên nếu cần
+    }
 }

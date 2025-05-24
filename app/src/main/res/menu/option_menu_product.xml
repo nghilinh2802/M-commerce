@@ -2,9 +2,25 @@
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:title="Item" />
-    <item android:title="Item" />
-    <item android:title="Item" />
-    <item android:title="Item" />
-    <item android:title="Item" />
+    <item
+        android:id="@+id/menu_new_product"
+        android:title="@string/title_new_product" />
+    <item
+        android:id="@+id/menu_refresh_product"
+        android:title="@string/title_refresh_product" />
+    <item
+        android:id="@+id/menu_search_product"
+        android:title="@string/title_search_product" />
+    <item
+        android:id="@+id/menu_filter_product"
+        android:title="@string/title_filter_product" />
+    <item
+        android:id="@+id/menu_compare_product"
+        android:title="@string/title_compare_product" />
+    <item
+        android:id="@+id/menu_export_product"
+        android:title="@string/title_export_product" />
+    <item
+        android:id="@+id/menu_help_product"
+        android:title="@string/title_help" />
 </menu>

@@ -13,6 +13,8 @@ public class Product implements Serializable {
     private String description;
     private int img_id;
 
+
+
     public Product() {
     }
 

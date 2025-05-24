@@ -39,4 +39,17 @@
     <string name="title_new">New</string>
     <string name="title_save">Save</string>
     <string name="title_remove">Remove</string>
+    <string name="title_new_product">New product</string>
+    <string name="title_refresh_product">Refresh product</string>
+    <string name="title_export_product">Export product</string>
+    <string name="title_filter_product">Filter product</string>
+    <string name="title_compare_product">Compare product</string>
+    <string name="title_search_product">Search product</string>
+    <string name="title_product_detail">PRODUCT DETAILS</string>
+    <string name="title_product_id">Product ID</string>
+    <string name="title_product_name">Product name</string>
+    <string name="title_quantity">Quantity</string>
+    <string name="title_price">Price</string>
+    <string name="title_category_id">Category ID</string>
+    <string name="title_description">Description</string>
 </resources>
