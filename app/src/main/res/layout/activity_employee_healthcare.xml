@@ -6,7 +6,7 @@
     tools:context=".EmployeeHealthcareActivity">
 
     <LinearLayout
-        android:id="@+id/main"
+        android:id="@+id/edt_customer_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"

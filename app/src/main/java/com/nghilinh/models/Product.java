@@ -11,17 +11,28 @@ public class Product implements Serializable {
     private double price;
     private int cate_id;
     private String description;
+    private int img_id;
 
     public Product() {
     }
 
-    public Product(int id, String name, int quantity, double price, int cate_id, String description) {
+    public Product(int id, String name, int quantity, double price, int cate_id, String description, int img_id) {
         this.id = id;
         this.name = name;
         this.quantity = quantity;
         this.price = price;
         this.cate_id = cate_id;
         this.description = description;
+        this.img_id = img_id;
+    }
+
+    public Product(int id, String name, int quantity, double price, String description, int img_id) {
+        this.id = id;
+        this.name = name;
+        this.quantity = quantity;
+        this.price = price;
+        this.description = description;
+        this.img_id = img_id;
     }
 
     public int getId() {
@@ -71,9 +82,26 @@ public class Product implements Serializable {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public int getImg_id() {
+        return img_id;
+    }
+
+    public void setImg_id(int img_id) {
+        this.img_id = img_id;
+    }
+
+    public Product(int id, String name, int quantity, double price, int img_id) {
+        this.id = id;
+        this.name = name;
+        this.quantity = quantity;
+        this.price = price;
+        this.img_id = img_id;
+    }
+
     @NonNull
     @Override
     public String toString() {
-        return "id: "+id+" | "+"Product: "+name+"\n"+"Price: "+price+"\n"+ "Quantity: "+quantity+" | "+"Category id: "+cate_id+"\n"+"Description: "+description;
+        return id+"\t"+name+"\t"+price;
     }
 }

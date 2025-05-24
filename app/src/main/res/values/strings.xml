@@ -27,4 +27,16 @@
     <string name="title_product">Product</string>
     <string name="title_product_management">PRODUCT MANAGEMENT</string>
     <string name="title_category_management">CATEGORY MANAGEMENT</string>
+    <string name="title_advanced_product">Advanced product</string>
+    <string name="title_new_customer">New customer</string>
+    <string name="title_broadcast_advertising">Broadcast Advertising</string>
+    <string name="title_help">Help</string>
+    <string name="title_customer_detail">Customer Detail</string>
+    <string name="title_customer_id">Customer ID:</string>
+    <string name="title_customer_name">Customer Name:</string>
+    <string name="title_customer_email">Customer Email:</string>
+    <string name="title_customer_phone">Customer Phone</string>
+    <string name="title_new">New</string>
+    <string name="title_save">Save</string>
+    <string name="title_remove">Remove</string>
 </resources>
