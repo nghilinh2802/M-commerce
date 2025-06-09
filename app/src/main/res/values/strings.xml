@@ -52,4 +52,6 @@
     <string name="title_price">Price</string>
     <string name="title_category_id">Category ID</string>
     <string name="title_description">Description</string>
+    <string name="title_payment_method">Payment method</string>
+    <string name="title_orders">Orders</string>
 </resources>

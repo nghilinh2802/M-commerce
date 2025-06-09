@@ -1,5 +1,6 @@
 package com.nghilinh.k22411csampleproject;
 
+import android.app.ComponentCaller;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -14,13 +15,16 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.nghilinh.adapters.SQLiteConnector;
 import com.nghilinh.connectors.CustomerConnector;
 import com.nghilinh.models.Customer;
+import com.nghilinh.models.ListCustomer;
 
 public class CustomerManagementActivity extends AppCompatActivity {
 
@@ -43,23 +47,26 @@ public class CustomerManagementActivity extends AppCompatActivity {
     }
 
     private void addEvents() {
-//        lvCustomer.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-//            @Override
-//            public boolean onItemLongClick(AdapterView<?> parent, View view, int i, long l) {
-//                Customer selected=adapter.getItem(i);
-//                adapter.remove(selected);
-//                return false;
-//            }
-//        });
-//
-        lvCustomer.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        lvCustomer.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Customer c=adapter.getItem(position);
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int i, long l) {
+                Customer c=adapter.getItem(i);
                 displayCustomerDetailActivity(c);
-
+//                adapter.remove(selected);
+                return false;
             }
         });
+//
+//        lvCustomer.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                Customer c=adapter.getItem(position);
+//                displayCustomerDetailActivity(c);
+//
+//            }
+//        });
+
+
     }
 
     private void displayCustomerDetailActivity(Customer c) {
@@ -71,8 +78,11 @@ public class CustomerManagementActivity extends AppCompatActivity {
     private void addViews() {
         lvCustomer=findViewById(R.id.lvCustomer);
         adapter=new ArrayAdapter<>(CustomerManagementActivity.this, android.R.layout.simple_list_item_1);
+
         connector=new CustomerConnector();
-        adapter.addAll(connector.get_all_customers());
+//        them 1 dong nay thoi sau khi da dieu chinh ben connector
+        ListCustomer lc = connector.getAllCustomers(new SQLiteConnector(this).openDatabase());
+        adapter.addAll(lc.getCustomers());
         lvCustomer.setAdapter(adapter);
     }
 
@@ -89,7 +99,9 @@ public class CustomerManagementActivity extends AppCompatActivity {
         {
             Toast.makeText(CustomerManagementActivity.this, "Mở màn hình thêm mới khách hàng", Toast.LENGTH_LONG).show();
             Intent intent=new Intent(CustomerManagementActivity.this,CustomerDetailActivity.class);
-            startActivity(intent);
+//            startActivity(intent);
+//            dong goi va dat ma ra quest code la 300
+            startActivityForResult(intent, 300);
         }
         else if (item.getItemId()==R.id.menu_broadcast_advertising)
         {
@@ -100,5 +112,33 @@ public class CustomerManagementActivity extends AppCompatActivity {
             Toast.makeText(CustomerManagementActivity.this, "Mở website hướng dẫn sử dụng", Toast.LENGTH_LONG).show();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+//        truong hop xu ly cho NEW CUSTOMER, ta chi quan tam 300 va 500 do ta dinh nghia
+        if (requestCode==300 && resultCode==500)
+        {
+//            lay goi tin ra
+            Customer c= (Customer) data.getSerializableExtra("NEW_CUSTOMER");
+            process_save_customer(c);
+        }
+    }
+
+    private void process_save_customer(Customer c) {
+        boolean result=connector.isExist(c);
+        if (result==true)
+        {
+//            tuc la customer nay da ton tai trong he thong, h ho co nhu cau sua thong tin khac vd address, payment method,...
+//            tu xu ly truong hop sua thong tin
+        }
+        else
+        {
+//            them moi khach hang chua ton tai
+            connector.addCustomer(c);
+            adapter.clear();
+            adapter.addAll(connector.get_all_customers());
+        }
     }
 }
