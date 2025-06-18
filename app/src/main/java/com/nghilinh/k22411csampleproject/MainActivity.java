@@ -18,10 +18,17 @@ public class MainActivity extends AppCompatActivity {
     TextView txtEmployee;
     ImageView imgCustomer;
     TextView txtCustomer;
-    ImageView imgCategory;
-    TextView txtCategory;
     ImageView imgProduct;
     TextView txtProduct;
+    ImageView imgAdvancedProduct;
+    TextView txtAdvancedProduct;
+    ImageView imgPaymentMethod;
+    TextView txtPaymentMethod;
+    ImageView imgOrder;
+    TextView txtOrder;
+    ImageView imgTelephonie;
+    TextView txtTelephonie;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         addViews();
         addEvents();
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.edt_customer_id), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
@@ -54,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
         imgCustomer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -68,19 +76,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        imgCategory.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openCategoryManagementActivity();
-            }
-        });
-
-        txtCategory.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openCategoryManagementActivity();
-            }
-        });
 
         imgProduct.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,9 +88,88 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 openProductManagementActivity();
+            }
+        });
+
+
+        imgAdvancedProduct.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openAdvancedProductManagementActivity();
+            }
+        });
+
+        txtAdvancedProduct.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openAdvancedProductManagementActivity();
+            }
+        });
+
+
+        imgPaymentMethod.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openPaymentMethodActivity();
+            }
+        });
+
+        txtPaymentMethod.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openPaymentMethodActivity();
+            }
+        });
+
+        imgOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openOrdersViewerActivity();
+            }
+        });
+
+        txtOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openOrdersViewerActivity();
+            }
+        });
+
+        imgTelephonie.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openTelephonieActivity();
+            }
+        });
+
+        txtTelephonie.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openTelephonieActivity();
             }
         });
     }
+
+    private void openTelephonieActivity() {
+        Intent intent=new Intent(MainActivity.this,TelephonieActivity.class);
+        startActivity(intent);
+    }
+
+    private void openOrdersViewerActivity() {
+        Intent intent=new Intent(MainActivity.this,OrdersViewerActivity.class);
+        startActivity(intent);
+    }
+
+    private void openPaymentMethodActivity() {
+        Intent intent=new Intent(MainActivity.this,PaymentMethodActivity.class);
+        startActivity(intent);
+    }
+
+    private void openAdvancedProductManagementActivity() {
+        Intent intent=new Intent(MainActivity.this,AdvancedProductManagementActivity.class);
+        startActivity(intent);
+    }
+
     void openEmployeeManagementActivity()
     {
         Intent intent=new Intent(MainActivity.this,EmployeeManagementActivity.class);
@@ -108,25 +182,28 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    void openCategoryManagementActivity()
-    {
-        Intent intent=new Intent(MainActivity.this,CategoryManagementActivity.class);
-        startActivity(intent);
-    }
-
     void openProductManagementActivity()
     {
         Intent intent=new Intent(MainActivity.this,ProductManagementActivity.class);
         startActivity(intent);
     }
+
+
     private void addViews() {
         imgEmployee=findViewById(R.id.imgEmployee);
         txtEmployee=findViewById(R.id.txtEmployee);
         imgCustomer=findViewById(R.id.imgCustomer);
         txtCustomer=findViewById(R.id.txtCustomer);
-        imgCategory=findViewById(R.id.imgCategory);
-        txtCategory=findViewById(R.id.txtCategory);
+        imgAdvancedProduct=findViewById(R.id.imgAdvancedProduct);
+        txtAdvancedProduct=findViewById(R.id.txtAdvancedProduct);
         imgProduct=findViewById(R.id.imgProduct);
         txtProduct=findViewById(R.id.txtProduct);
+        imgPaymentMethod=findViewById(R.id.imgPaymentMethod);
+        txtPaymentMethod=findViewById(R.id.txtPaymentMethod);
+        imgOrder=findViewById(R.id.imgOrder);
+        txtOrder=findViewById(R.id.txtOrder);
+        imgTelephonie=findViewById(R.id.imgTelephonie);
+        txtTelephonie=findViewById(R.id.txtTelephonie);
+        
     }
 }
