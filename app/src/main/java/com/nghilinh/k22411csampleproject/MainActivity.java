@@ -26,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
     TextView txtPaymentMethod;
     ImageView imgOrder;
     TextView txtOrder;
+    ImageView imgTelephonie;
+    TextView txtTelephonie;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -132,6 +134,25 @@ public class MainActivity extends AppCompatActivity {
                 openOrdersViewerActivity();
             }
         });
+
+        imgTelephonie.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openTelephonieActivity();
+            }
+        });
+
+        txtTelephonie.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openTelephonieActivity();
+            }
+        });
+    }
+
+    private void openTelephonieActivity() {
+        Intent intent=new Intent(MainActivity.this,TelephonieActivity.class);
+        startActivity(intent);
     }
 
     private void openOrdersViewerActivity() {
@@ -181,5 +202,8 @@ public class MainActivity extends AppCompatActivity {
         txtPaymentMethod=findViewById(R.id.txtPaymentMethod);
         imgOrder=findViewById(R.id.imgOrder);
         txtOrder=findViewById(R.id.txtOrder);
+        imgTelephonie=findViewById(R.id.imgTelephonie);
+        txtTelephonie=findViewById(R.id.txtTelephonie);
+        
     }
 }

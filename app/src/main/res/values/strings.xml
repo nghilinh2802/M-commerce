@@ -54,4 +54,7 @@
     <string name="title_description">Description</string>
     <string name="title_payment_method">Payment method</string>
     <string name="title_orders">Orders</string>
+    <string name="title_telephonie">Telephonie</string>
+    <string name="title_contact_name">Contact name</string>
+    <string name="title_phone_number">Phone number</string>
 </resources>

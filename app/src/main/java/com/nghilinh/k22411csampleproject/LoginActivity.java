@@ -1,15 +1,24 @@
 package com.nghilinh.k22411csampleproject;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
+import android.telephony.TelephonyManager;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -34,11 +43,16 @@ public class LoginActivity extends AppCompatActivity {
     EditText edtUserName;
     EditText edtPassword;
     CheckBox chkSaveLogin;
+    TextView txtNetworkType;
 
 
     String DATABASE_NAME="Sales.Database.sqlite";
     private static final String DB_PATH_SUFFIX = "/databases/";
     SQLiteDatabase database=null;
+
+    BroadcastReceiver networkReceiver=null;
+
+    Button btnLogin;
 
 
     private static final int DOUBLE_BACK_PRESS_INTERVAL = 500; // 0.5 seconds
@@ -56,12 +70,57 @@ public class LoginActivity extends AppCompatActivity {
             return insets;
         });
         processCopy();
+
+        setupBroadcastReceiver();
+    }
+
+    private void setupBroadcastReceiver() {
+        networkReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+//                chút nua se tu dong nhay vao day khi internet thay doi trang thai
+//
+            ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(CONNECTIVITY_SERVICE);
+            NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+
+                // Check if the network is connected
+                if (networkInfo != null && networkInfo.isConnected()) {
+                    if (networkInfo.getType() == ConnectivityManager.TYPE_WIFI) {
+                        // Set background color to green for Wi-Fi in the TextView
+                        findViewById(R.id.txtNetworkType).setBackgroundColor(Color.parseColor("#4CAF50")); // Green (Wi-Fi)
+                    } else if (networkInfo.getType() == ConnectivityManager.TYPE_MOBILE) {
+                        // Check if mobile data is 4G or 3G and set color accordingly
+                        if (networkInfo.getSubtype() == TelephonyManager.NETWORK_TYPE_LTE) {
+                            // Set background color to yellow for 4G in the TextView
+                            findViewById(R.id.txtNetworkType).setBackgroundColor(Color.parseColor("#FFEB3B")); // Yellow (4G)
+                        } else {
+                            // Set background color to blue for other mobile data types in the TextView
+                            findViewById(R.id.txtNetworkType).setBackgroundColor(Color.parseColor("#2196F3")); // Blue (Mobile Data)
+                        }
+                    }
+                } else {
+                    // Set background color to red for no internet connection in the TextView
+                    findViewById(R.id.txtNetworkType).setBackgroundColor(Color.parseColor("#F44336")); // Red (No internet)
+                }
+            }
+        };
+//            if(networkInfo != null && networkInfo.isConnected())
+//                {
+//                    btnLogin.setVisibility(View.VISIBLE);
+//                }
+//            else
+//                {
+//                    btnLogin.setVisibility(View.INVISIBLE);
+//                }
+//            }
+//        };
     }
 
     private void addViews() {
         edtUserName = findViewById(R.id.edtUserName);
         edtPassword = findViewById(R.id.edtPassword);
         chkSaveLogin = findViewById(R.id.chkSaveLoginInfor);
+        btnLogin = findViewById(R.id.btnLogin);
     }
 
     public void do_login(View view) {
@@ -86,6 +145,7 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
         if (isBackPressedOnce) {
             // If back is pressed twice within 0.5 seconds, show the exit confirmation dialog
             showExitDialog();
@@ -171,6 +231,11 @@ public class LoginActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         saveLoginInformation();
+
+        if (networkReceiver!=null)
+        {
+            unregisterReceiver(networkReceiver);
+        }
     }
 
     public void restoreLoginInformation()
@@ -191,6 +256,9 @@ public class LoginActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         restoreLoginInformation();
+
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(networkReceiver, filter);
     }
 
     private void processCopy() {

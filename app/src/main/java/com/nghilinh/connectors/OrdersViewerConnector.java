@@ -16,13 +16,26 @@ public class OrdersViewerConnector {
 
       StringBuilder builder=new StringBuilder();
 
-      builder.append(" SELECT ");
-      builder.append(" o.Id AS OrderId,  ");
-      builder.append(" o.Code AS OrderCode,  ");
-      builder.append(" o.OrderDate,  ");
-      builder.append(" e.Name AS EmployeeName,  ");
-      builder.append(" c.Name AS CustomerName,  ");
-      builder.append(" SUM((od.Quantity * od.Price - od.Discount * od.Quantity * od.Price) * (1 + od.VAT)) AS TotalOrderValue  ");
+//      builder.append(" SELECT ");
+//      builder.append(" o.Id AS OrderId,  ");
+//      builder.append(" o.Code AS OrderCode,  ");
+//      builder.append(" o.OrderDate,  ");
+//      builder.append(" e.Name AS EmployeeName,  ");
+//      builder.append(" c.Name AS CustomerName,  ");
+//      builder.append(" SUM((od.Quantity * od.Price - od.Discount * od.Quantity * od.Price) * (1 + od.VAT)) AS TotalOrderValue  ");
+
+        builder.append("SELECT ");
+        builder.append("o.Id AS OrderId, ");
+        builder.append("o.Code AS OrderCode, ");
+        builder.append("o.OrderDate, ");
+        builder.append("e.Name AS EmployeeName, ");
+        builder.append("c.Name AS CustomerName, ");
+        builder.append("SUM((od.Quantity * od.Price - od.Discount * od.Quantity * od.Price) * (1 + od.VAT)) AS TotalOrderValue ");
+        builder.append("FROM Orders o ");
+        builder.append("JOIN Employee e ON o.EmployeeId = e.Id ");
+        builder.append("JOIN Customer c ON o.CustomerId = c.Id ");
+        builder.append("LEFT JOIN OrderDetails od ON o.Id = od.OrderId ");
+        builder.append("GROUP BY o.Id");
 
       String sql=builder.toString();
       Cursor cursor = database.rawQuery(sql, null);

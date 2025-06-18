@@ -1,5 +1,6 @@
 package com.nghilinh.connectors;
 
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
@@ -87,4 +88,33 @@ public class CustomerConnector {
         return listCustomer;
     }
 
+    public long saveNewCustomer(Customer c,SQLiteDatabase database)
+    {
+        ContentValues values = new ContentValues();
+        values.put("Name", c.getName());
+        values.put("Email", c.getEmail());
+        values.put("Phone", c.getPhone());
+        values.put("Username", c.getUsername());
+        values.put("Password", c.getPassword());
+        long flag=database.insert("Customer", null,values);
+        return flag;
+    }
+
+    public long saveUpdateCustomer(Customer c, SQLiteDatabase database)
+    {
+        ContentValues values = new ContentValues();
+        values.put("Name", c.getName());
+        values.put("Email", c.getEmail());
+        values.put("Phone", c.getPhone());
+        values.put("Username", c.getUsername());
+        values.put("Password", c.getPassword());
+        long flag=database.update("Customer", values, "Id=?", new String[]{c.getId()+""});
+        return flag;
+    }
+
+    public long removeCustomer(String id, SQLiteDatabase database)
+    {
+        int flag=database.delete("Customer", "Id=?", new String[]{id});
+        return flag;
+    }
 }

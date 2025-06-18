@@ -2,6 +2,7 @@ package com.nghilinh.k22411csampleproject;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -47,12 +48,27 @@ public class CustomerDetailActivity extends AppCompatActivity {
                 process_save_customer();
             }
         });
+        btnRemove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {process_remove_customer();}
+        });
+    }
+
+    private void process_remove_customer() {
+        Intent intent=getIntent();
+        String id=edt_customer_id.getText().toString();
+        Log.d("RemoveCustomer", "Customer ID to remove: " + id);
+        intent.putExtra("CUSTOMER_ID_REMOVE",id);
+        setResult(600,intent);
+        finish();
     }
 
     private void process_save_customer() {
 //        lay du lieu tren giao dien va mo hinh hoa lai huong doi tuong customer
         Customer c=new Customer();
-        c.setId(Integer.parseInt(edt_customer_id.getText().toString()));
+        String id=edt_customer_id.getText().toString();
+        if (id.trim().length()>0)
+            c.setId(Integer.parseInt(id));
         c.setName(edt_customer_name.getText().toString());
         c.setEmail(edt_customer_email.getText().toString());
         c.setPhone(edt_customer_phone.getText().toString());
@@ -86,8 +102,10 @@ public class CustomerDetailActivity extends AppCompatActivity {
     private void display_infor() {
         Intent intent=getIntent();
         Customer c= (Customer) intent.getSerializableExtra("SELECTED_CUSTOMER");
-        if (c==null)
+        if (c==null) {
+            edt_customer_id.setVisibility(View.GONE);
             return;
+        }
         edt_customer_id.setText(c.getId()+"");
         edt_customer_name.setText(c.getName());
         edt_customer_email.setText(c.getEmail());
