@@ -1,51 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
-
-    <TextView
-        android:id="@+id/txtTelephonieName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        android:textColor="#3F51B5"
-        android:textSize="20sp" />
-
-    <TextView
-        android:id="@+id/txtTelephonieNumber"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        android:textColor="#F44336"
-        android:textSize="16sp" />
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    card_view:cardBackgroundColor="@color/white"
+    android:background="@android:color/white">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp">
 
-        <ImageView
-            android:id="@+id/imgDirectCall"
-            android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/txtTelephonieName"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:srcCompat="@mipmap/ic_call_direct" />
+            android:paddingBottom="4dp"
+            android:text="Tên khách hàng"
+            android:textColor="#3F51B5"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
-        <ImageView
-            android:id="@+id/imgDialUp"
-            android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/txtTelephonieNumber"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:srcCompat="@mipmap/ic_call_dialup" />
+            android:paddingBottom="5dp"
+            android:text="Số điện thoại"
+            android:textColor="#E91E63"
+            android:textSize="16sp" />
 
-        <ImageView
-            android:id="@+id/imgSendSMS"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:srcCompat="@mipmap/ic_sms" />
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:weightSum="3">
+
+            <ImageView
+                android:id="@+id/imgDirectCall"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:layout_marginEnd="8dp"
+                android:src="@mipmap/ic_call_direct"
+                android:scaleType="centerInside" />
+
+            <ImageView
+                android:id="@+id/imgDialUp"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:layout_marginEnd="8dp"
+                android:src="@mipmap/ic_call_dialup"
+                android:scaleType="centerInside" />
+
+            <ImageView
+                android:id="@+id/imgSendSMS"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:src="@mipmap/ic_sms"
+                android:scaleType="centerInside" />
+        </LinearLayout>
     </LinearLayout>
-
-</LinearLayout>
+</androidx.cardview.widget.CardView>
